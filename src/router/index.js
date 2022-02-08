@@ -7,6 +7,7 @@ const home = () => import("views/home/home.vue");
 const category = () => import("views/category/category.vue");
 const shopcart = () => import("views/shopcart/shopcart.vue");
 const profile = () => import("views/profile/profile.vue");
+const detail = () => import("views/detail/detail.vue");
 
 
 const routes = [
@@ -16,19 +17,38 @@ const routes = [
   },
   {
     path: '/home',
-    component: home
+    component: home,
+    meta: {
+      footShow: true
+    }
   },
   {
     path: '/category',
-    component: category
+    component: category,
+    meta: {
+      footShow: true
+    }
   },
   {
     path: '/shopcart',
-    component: shopcart
+    component: shopcart,
+    meta: {
+      footShow: true
+    }
   },
   {
     path: '/profile',
-    component: profile
+    component: profile,
+    meta: {
+      footShow: true
+    }
+  },
+  {
+    path: '/detail/:iid',
+    component: detail,
+    meta: {
+      footShow: false
+    }
   }
 ]
 

@@ -1,6 +1,7 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="">
+  <div class="goods-item" @click='itemClick'>
+    <!-- @load是vue框架用来监听事件加载 -->
+    <img :src="showImage" alt="" @load='imageLoad'>
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -23,6 +24,31 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    imageLoad() {
+      // 因为在其他界面也有用到这个组件
+      // 所以我们需要判断什么时候监听
+      // 1.通过路由进行判断
+        // 判断路由的url让每个页面去监听自己的事件
+      // if($route.path.indexOf('/home')) {
+      //   this.$bus.$emit('homeitemImageLoad');
+      // }else if($route.path.indexOf('/detail')){
+      //   this.$bus.$emit('detailitemImageLoad');
+      // }
+
+      // 2.在首页中判断，当离开首页后，就可以取消监听事件
+
+      this.$bus.$emit('itemImageLoad');
+    },
+    itemClick(){
+      this.$router.push('/detail/' + this.goodsItem.iid);
+    }
+  },
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img ;
     }
   }
 }

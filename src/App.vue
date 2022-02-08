@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-   <mainTabbar></mainTabbar>
+    <keep-alive exclude="detail">
+      <!-- exclude中属性写的是组件的name -->
+      <router-view></router-view>
+    </keep-alive>
+   <mainTabbar v-if="$route.meta.footShow"></mainTabbar>
   </div>
 </template>
 
